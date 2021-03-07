@@ -23,7 +23,7 @@ function pickWords(numWords) {
 	console.log(queryString);
 	
 	const PRIME = 37;
-	const bonus = 10;
+	let bonus = 10;
 	
 	return seed.split('').map(c => {
 		const idx = (bonus * c.charCodeAt(0) * PRIME) % wordList.length;
