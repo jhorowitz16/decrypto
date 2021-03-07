@@ -25,7 +25,7 @@ function pickWords(numWords) {
 	const PRIME = 37;
 	
 	return seed.split('').map(c => {
-		const idx = (c.charCodeAt(i) * PRIME) % wordList.length;
+		const idx = (c.charCodeAt(0) * PRIME) % wordList.length;
 		console.log(idx);
 		return wordList[idx];
 	}).slice(0, 4);
