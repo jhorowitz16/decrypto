@@ -56,7 +56,8 @@ function setWords(words) {
 }
 
 function loadWords() {
-	return Cookies.getJSON("words");
+	// return Cookies.getJSON("words");
+	return pickWords(4);
 }
 
 function loadCode() {
