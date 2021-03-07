@@ -19,14 +19,16 @@ function pickWords(numWords) {
 	console.log(wordList.length);
 
 	const queryString = window.location.search;
-	const seed = queryString.split('=')[1];
+	const seed = queryString.split('=')[1] + "abcd";
 	console.log(queryString);
 	
 	const PRIME = 37;
+	const bonus = 10;
 	
 	return seed.split('').map(c => {
-		const idx = (c.charCodeAt(0) * PRIME) % wordList.length;
+		const idx = (bonus * c.charCodeAt(0) * PRIME) % wordList.length;
 		console.log(idx);
+		bonus += 7;
 		return wordList[idx];
 	}).slice(0, 4);
 	
