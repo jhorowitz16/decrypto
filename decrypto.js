@@ -15,7 +15,22 @@ function loadWordList() {
 }
 
 function pickWords(numWords) {
-	return _.sample(wordList, numWords);
+	console.log(numWords);
+	console.log(wordList.length);
+
+	const queryString = window.location.search;
+	const seed = queryString.split('=')[1];
+	console.log(queryString);
+	
+	const PRIME = 37;
+	
+	return seed.split('').map(c => {
+		const idx = (c.charCodeAt(i) * PRIME) % wordList.length;
+		console.log(idx);
+		return wordList[idx];
+	}).slice(0, 4);
+	
+	// return _.sample(wordList, numWords);
 }
 
 function generateCode() {
