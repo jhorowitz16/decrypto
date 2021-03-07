@@ -19,18 +19,19 @@ function pickWords(numWords) {
 	console.log(wordList.length);
 
 	const queryString = window.location.search;
-	const seed = queryString.split('=')[1] + "abcd";
+	const seed = queryString.split('=')[1] + "abcdef";
 	console.log(queryString);
 	
 	const PRIME = 37;
 	let bonus = seed.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
 	
-	return seed.split('').map(c => {
+	const words = seed.split('').map(c => {
 		const idx = (bonus * c.charCodeAt(0) * PRIME) % wordList.length;
 		console.log(idx);
 		bonus += 7;
 		return wordList[idx];
-	}).slice(0, 4);
+	});
+	return [...new Set(words)].slice(0, 4);
 	
 	// return _.sample(wordList, numWords);
 }
