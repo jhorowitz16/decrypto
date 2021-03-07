@@ -23,7 +23,7 @@ function pickWords(numWords) {
 	console.log(queryString);
 	
 	const PRIME = 37;
-	let bonus = 10;
+	let bonus = 123;
 	
 	return seed.split('').map(c => {
 		const idx = (bonus * c.charCodeAt(0) * PRIME) % wordList.length;
@@ -71,7 +71,7 @@ function loadCode() {
 
 function newGame() {
 	var words = pickWords(4);
-	Cookies.set("words", words);
+	// Cookies.set("words", words);
 	Cookies.remove("code");
 	$('#revealCodeButton').hide();
 	return words;
