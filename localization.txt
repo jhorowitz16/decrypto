@@ -1,0 +1,8 @@
+New Game,Új játék
+Code,Kód
+Reveal code,Kód felfedése
+Generate new code,Új kód generálása
+Language: English,Nyelv: magyar
+Do you want to start a new game?,Szeretnél új játékot kezdeni?
+Cancel,Mégsem
+Start New Game, Új játék

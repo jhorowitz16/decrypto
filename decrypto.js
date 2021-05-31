@@ -1,4 +1,34 @@
+var localization;
 var wordList;
+var words;
+
+function loadLocalization() {
+  var localization;
+
+  $.ajax({
+    url: "localization.txt",
+    dataType: "text",
+    success: function (data) {
+      localization = data.split("\n");
+    },
+    async: false
+  });
+  return localization;
+}
+
+function changeLanguage(lang) {
+  $('#newGameButton').text(localization[0].split(",")[lang]);
+  $('#newGameModalLabel').text(localization[0].split(",")[lang]);
+  $('#dropdownMenuButton').text(localization[1].split(",")[lang]);
+  $('#codeModalLongTitle').text(localization[1].split(",")[lang]);
+  $('#revealCodeButton').text(localization[2].split(",")[lang]);
+  $('#generateNewCodeButton').text(localization[3].split(",")[lang]);
+  $('#languageButton').text(localization[4].split(",")[lang]);
+  $('#newGameModalQuestion').text(localization[5].split(",")[lang]);
+  $('#newGameModalCancelButton').text(localization[6].split(",")[lang]);
+  $('#newGameModalStartButton').text(localization[7].split(",")[lang]);
+  setWords(words, lang);
+}
 
 function loadWordList() {
 	var wordList;
@@ -50,9 +80,9 @@ function setCode(code) {
 	$('#revealCodeButton').show();
 }
 
-function setWords(words) {
+function setWords(words, lang) {
 	for(idx = 0; idx < 4; idx++) {
-		$('#word' + idx).text(words[idx]);
+    $('#word' + idx).text(words[idx].split(",")[lang]);
 	}
 }
 
@@ -127,13 +157,14 @@ function initScreenfull() {
 function initialize() {
 	initScreenfull();
 
+	localization = loadLocalization();
 	wordList = loadWordList();
 	loadCode();
 
-	var words = loadWords();
+	words = loadWords();
 
 	if (words) {
-		setWords(words);
+		setWords(words, 0);
 	} else {
 		/*
 		startNewGame();

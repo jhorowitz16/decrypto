@@ -40,7 +40,7 @@
             <p><h3>Decrypto</h3></p>
           </div>
           <div class="col-4">
-            <button type="button" class="btn-lg btn-primary align-baseline float-right my-3" data-toggle="modal" data-target="#newGameModal">
+            <button type="button" class="btn-lg btn-primary align-baseline float-right my-3" data-toggle="modal" data-target="#newGameModal" id="newGameButton">
               New Game
             </button>
           </div>
@@ -116,7 +116,18 @@
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#codeModal" id="revealCodeButton" style:"display:none">Reveal code</a>
-                <a class="dropdown-item" href="#" onclick="generateCode()">Generate new code</a>
+                <a class="dropdown-item" href="#" onclick="generateCode()" id="generateNewCodeButton">Generate new code</a>
+              </div>
+            </div>
+          </div>
+            <div class="float-left">
+            <div class="dropdown">              
+              <button class="btn btn-primary btn-lg dropdown-toggle my-3" type="button" id="languageButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Language: English
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#" onclick="changeLanguage(0)">English</a>
+                <a class="dropdown-item" href="#" onclick="changeLanguage(1)">Magyar</a>
               </div>
             </div>
           </div>
@@ -142,12 +153,12 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="newGameModalQuestion">
         Do you want to start a new game?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="newGameModalCancelButton">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="startNewGame()">Start New Game</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="startNewGame()" id="newGameModalStartButton" >Start New Game</button>
       </div>
     </div>
   </div>
