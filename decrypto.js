@@ -1,4 +1,5 @@
 var localization;
+var lang;
 var wordList;
 var words;
 
@@ -16,7 +17,8 @@ function loadLocalization() {
   return localization;
 }
 
-function changeLanguage(lang) {
+function changeLanguage(language) {
+  lang = language;
   $('#newGameButton').text(localization[0].split(",")[lang]);
   $('#newGameModalLabel').text(localization[0].split(",")[lang]);
   $('#dropdownMenuButton').text(localization[1].split(",")[lang]);
@@ -27,7 +29,7 @@ function changeLanguage(lang) {
   $('#newGameModalQuestion').text(localization[5].split(",")[lang]);
   $('#newGameModalCancelButton').text(localization[6].split(",")[lang]);
   $('#newGameModalStartButton').text(localization[7].split(",")[lang]);
-  setWords(words, lang);
+  setWords();
 }
 
 function loadWordList() {
@@ -45,23 +47,11 @@ function loadWordList() {
 }
 
 function pickWords(numWords) {
-	console.log(numWords);
-	console.log(wordList.length);
-
-	const queryString = window.location.search;
-	const seed = queryString.split('=')[1] + "abcdef";
-	console.log(queryString);
-	
-	const PRIME = 37;
-	let bonus = seed.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
-	
-	const words = seed.split('').map(c => {
-		const idx = (bonus * c.charCodeAt(0) * PRIME) % wordList.length;
-		console.log(idx);
-		bonus += 7;
-		return wordList[idx];
-	});
-	return [...new Set(words)].slice(0, 4);
+  const picks;
+  for (let i = 0; i < numWords; i += 1) {
+    picks.push(wordList.splice(~~(Math.random() * wordList.length), 1)[0]);
+  }
+  return picks;
 	
 	// return _.sample(wordList, numWords);
 }
@@ -80,7 +70,7 @@ function setCode(code) {
 	$('#revealCodeButton').show();
 }
 
-function setWords(words, lang) {
+function setWords() {
 	for(idx = 0; idx < 4; idx++) {
     $('#word' + idx).text(words[idx].split(",")[lang]);
 	}
@@ -101,11 +91,10 @@ function loadCode() {
 }
 
 function newGame() {
-	var words = pickWords(4);
+	words = pickWords(4);
 	// Cookies.set("words", words);
 	Cookies.remove("code");
 	$('#revealCodeButton').hide();
-	return words;
 }
 
 function toggleFullScreen() {
@@ -128,7 +117,8 @@ function setFullScreenIcon() {
 }
 
 function startNewGame() {
-	setWords(newGame());
+  newGame();
+	setWords();
 }
 
 function disableScreenLock() {
@@ -158,13 +148,14 @@ function initialize() {
 	initScreenfull();
 
 	localization = loadLocalization();
+  lang = 0;
 	wordList = loadWordList();
 	loadCode();
 
 	words = loadWords();
 
 	if (words) {
-		setWords(words, 0);
+		setWords(words);
 	} else {
 		/*
 		startNewGame();
