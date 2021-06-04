@@ -47,7 +47,7 @@ function loadWordList() {
 }
 
 function pickWords(numWords) {
-  const picks;
+  const picks = [];
   for (let i = 0; i < numWords; i += 1) {
     picks.push(wordList.splice(~~(Math.random() * wordList.length), 1)[0]);
   }
